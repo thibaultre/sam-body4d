@@ -284,8 +284,6 @@ def load_video_frames_from_video_file(
     for frame in decord.VideoReader(video_path, width=image_size, height=image_size):
         images.append(frame.permute(2, 0, 1))
 
-    #images = torch.stack(images, dim=0).float() / 255.0
-    # NOTE: line above uses 3x amount of (peak) memory of line below
     images = torch.stack(images, dim=0).to(torch.float32).div_(255.0)
     if not offload_video_to_cpu:
         images = images.to(compute_device)
