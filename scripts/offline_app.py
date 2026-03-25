@@ -500,7 +500,7 @@ def inference(args):
             if len(outputs) > 0:
                 break
         
-        inference_state = predictor.predictor.init_state(video_path=args.input_video)
+        inference_state = predictor.predictor.init_state(video_path=args.input_video, offload_video_to_cpu=True)
         predictor.predictor.clear_all_points_in_video(inference_state)
         predictor.RUNTIME['inference_state'] = inference_state
         predictor.RUNTIME['out_obj_ids'] = []
